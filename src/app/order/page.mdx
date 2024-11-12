@@ -1,0 +1,174 @@
+export const metadata = {
+  title: 'Transaksi',
+  description: 'Kami menyediakan API untuk melakukan transaksi Top Up Games.',
+}
+
+export const sections = [
+  { title: 'Create Order', id: 'create-order' },
+  { title: 'Check Status', id: 'check-status' },
+]
+
+# Order
+
+Kami menyediakan API untuk melakukan transaksi Top Up Games. {{ className: 'lead' }}
+
+## Create Order {{ tag: 'POST', label: '/orders' }}
+
+Berikut adalah endpoint API untuk melakukan transaksi. {{ className: 'lead' }}
+
+<Note>
+  Sebelum Anda bisa membuat request ke API kami, Anda harus mendapatkan Member
+  Code dari dashboard Anda. Anda dapat mengaksesnya di [Pengaturan &raquo;
+  Akun](https://barbartopup.com/account/settings).
+</Note>
+
+## Params
+
+| Param       | Type   | Description                                             |
+| ----------- | ------ | ------------------------------------------------------- |
+| member_code | string | Member Code Anda.                                       |
+| ref_id      | string | ID Transaksi Anda.                                      |
+| code        | string | Kode Produk.                                            |
+| tujuan      | string | Tujuan Transaksi.                                       |
+| server_id   | string | Isi string kosong "" jika tujuan tidak memiliki Server. |
+
+<Note>
+  Untuk Game / Operator yang tidak memiliki Server, Anda dapat mengisinya dengan
+  mengosongkan server_id.
+</Note>
+
+<CodeGroup title="Request" tag="POST" label="/orders">
+
+```bash {{ title: 'PHP' }}
+$curl_data = [
+    "member_code" => "member kode anda",
+    "ref_id" => "ref id unik anda",
+    "code" => "kode produk",
+    "tujuan" => "tujuan pengisian"
+    "server_id" => "",
+];
+
+$ch = curl_init();
+    curl_setopt_array($ch, array(
+    CURLOPT_URL             => "https://barbartopup.com/api/orders",
+    CURLOPT_POST            => true,
+    CURLOPT_RETURNTRANSFER  => true,
+    CURLOPT_HEADER          => false,
+    CURLOPT_POSTFIELDS      => $curl_data,
+    CURLOPT_IPRESOLVE	=> CURL_IPRESOLVE_V4,
+));
+
+$json = curl_exec($ch);
+$result = json_decode($json, true);
+curl_close($ch);
+```
+
+```bash {{ title: 'cURL' }}
+curl -X POST https://barbartopup.com/api/orders \
+    -d "member_code=member kode anda" \
+    -d "ref_id=ref id unik anda" \
+    -d "code=kode produk" \
+    -d "tujuan=tujuan pengisian" \
+    -d "server_id="
+```
+
+</CodeGroup>
+
+<CodeGroup title="Response">
+
+```bash {{ title: 'Success' }}
+{
+    "status": true,
+    "message": "Pesanan dalam proses",
+    "data": {
+        "ref_id": "TRX240309356326",
+        "order_id": "GOTO240309435836",
+        "games": "Mobile Legends",
+        "product": "10 Diamond",
+        "status": "Processing",
+        "note": "03118856072837846990",
+    }
+}
+```
+
+```bash {{ title: 'Failed' }}
+{
+    "status": false,
+    "message": "Produk sedang maintenance",
+    "data": []
+}
+```
+
+</CodeGroup>
+
+## Check Status {{ tag: 'POST', label: '/status' }}
+
+Berikut adalah endpoint API untuk melakukan cek status transaksi. {{ className: 'lead' }}
+
+## Params
+
+| Param       | Type   | Description        |
+| ----------- | ------ | ------------------ |
+| member_code | string | Member Code Anda.  |
+| ref_id      | string | ID Transaksi Anda. |
+
+<CodeGroup title="Request" tag="POST" label="/status">
+
+```bash {{ title: 'PHP' }}
+$curl_data = [
+    "member_code" => "member kode anda",
+    "ref_id" => "ref id unik anda",
+];
+
+$ch = curl_init();
+    curl_setopt_array($ch, array(
+    CURLOPT_URL             => "https://barbartopup.com/api/status",
+    CURLOPT_POST            => true,
+    CURLOPT_RETURNTRANSFER  => true,
+    CURLOPT_HEADER          => false,
+    CURLOPT_POSTFIELDS      => $curl_data,
+    CURLOPT_IPRESOLVE	=> CURL_IPRESOLVE_V4,
+));
+
+$json = curl_exec($ch);
+$result = json_decode($json, true);
+curl_close($ch);
+```
+
+```bash {{ title: 'cURL' }}
+curl -X POST https://barbartopup.com/api/status \
+    -d "member_code=member kode anda" \
+    -d "ref_id=ref id unik anda"
+```
+
+</CodeGroup>
+
+<CodeGroup title="Response">
+
+```bash {{ title: 'Success' }}
+{
+    "status": true,
+    "message": "Ref ID ditemukan",
+    "data": {
+        "status": "Success",
+        "note": "03118856072837846990",
+        "ref_id": "TRX240309356326",
+        "order_id": "API-GOTO240309435836"
+    }
+}
+```
+
+```bash {{ title: 'Canceled' }}
+{
+    "status": true,
+    "message": "Ref ID ditemukan",
+    "data": {
+        "status": "Canceled",
+        "note": "Nomor tujuan salah",
+        "ref_id": "TRX240309356326",
+        "order_id": "API-GOTO240309435836"
+    }
+}
+```
+
+</CodeGroup>

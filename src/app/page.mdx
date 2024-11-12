@@ -1,0 +1,39 @@
+import { Guides } from '@/components/Guides'
+import { Resources } from '@/components/Resources'
+import { HeroPattern } from '@/components/HeroPattern'
+
+export const metadata = {
+  title: 'Dokumentasi API BarbarTopup',
+  description: 'Halo, selamat datang di Dokumentasi Integrasi BarbarTopup.',
+}
+
+export const sections = [{ title: 'Resources', id: 'resources' }]
+
+<HeroPattern />
+
+# Dokumentasi API BarbarTopup
+
+Halo, selamat datang di Dokumentasi Integrasi BarbarTopup. {{ className: 'lead' }}
+
+## Getting started {{ anchor: false }}
+
+Beberapa langkah dasar yang harus Anda lakukan untuk memulai: {{ className: 'lead' }}
+
+1. <div className="not-prose">
+     <Button
+       href="https://barbartopup.com/account/settings"
+       variant="text"
+       arrow="right"
+     >
+       <>Dapatkan Member Code</>
+     </Button>
+   </div>
+2. API menggunakan method POST dan GET.
+3. Pengujian endpoint dengan method POST pada postman menggunakan Body [form-data].
+
+<Note>
+  Silahkan White List IP Server kami (36.50.77.50) Semua request pada API
+  menggunakan URL https://barbartopup.com/api/.
+</Note>
+
+<Resources />

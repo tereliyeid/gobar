@@ -1,0 +1,42 @@
+export const metadata = {
+  title: 'Webhook / Callback',
+  description: 'Kami menyediakan API untuk melakukan transaksi Top Up Games.',
+}
+
+export const sections = [{ title: 'Via POST / GET', id: 'post' }]
+
+# Webhook / Callback
+
+<Note>
+  Kami akan mengirimkan report ke webhook anda setiap ada perubahan status
+  transaksi Pastikan sudah mengatur URL webhook dan Whitelist IP Kami :
+  36.50.77.50.
+</Note>
+
+<CodeGroup title="Response">
+
+```bash {{ title: 'Success' }}
+{
+  "status": "Success",
+  "message": "Transaksi Success",
+  "sn": "barbartopup.com. Ref: GOTO20240330761991",
+  "ref_id": "TRX20240329847507",
+  "order_id": "GOTO20240330761991",
+  "produk": "384 Diamonds (346 + 38 bonus)",
+  "price": 95611
+}
+```
+
+```bash {{ title: 'Canceled' }}
+{
+  "status": "Canceled",
+  "message": "Transaksi Canceled",
+  "sn": "",
+  "ref_id": "TRX20240329847507",
+  "order_id": "GOTO20240330761991",
+  "produk": "384 Diamonds (346 + 38 bonus)",
+  "price": 95611
+}
+```
+
+</CodeGroup>

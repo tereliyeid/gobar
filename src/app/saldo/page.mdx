@@ -1,0 +1,80 @@
+export const metadata = {
+  title: 'Saldo',
+  description:
+    'Kami menyediakan API untuk mendapatkan informasi akun dan pengecekan saldo akun Anda.',
+}
+
+export const sections = [{ title: 'Cek Saldo', id: 'cek-saldo' }]
+
+# Saldo
+
+Kami menyediakan API untuk mendapatkan informasi akun dan pengecekan saldo akun Anda. {{ className: 'lead' }}
+
+<Note>
+  Sebelum Anda bisa membuat request ke API kami, Anda harus mendapatkan Member
+  Code dari dashboard Anda. Anda dapat mengaksesnya di [Pengaturan &raquo;
+  Akun](https://barbartopup.com/account/settings).
+</Note>
+
+## Cek Saldo {{ tag: 'GET', label: '/member' }}
+
+Berikut adalah endpoint API untuk mendapatkan informasi saldo akun Anda. {{ className: 'lead' }}
+
+## Params
+
+| Param       | Type   | Description       |
+| ----------- | ------ | ----------------- |
+| member_code | string | Member Code Anda. |
+
+<CodeGroup title="Request" tag="GET" label="/member">
+
+    ```php
+    $curl_data = [
+      "member_code" => "Member Code anda",
+    ];
+
+    $ch = curl_init();
+      curl_setopt_array($ch, array(
+      CURLOPT_URL => "https://barbartopup.com/api/member",
+      CURLOPT_POST => true,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_HEADER => false,
+      CURLOPT_POSTFIELDS => $curl_data,
+      CURLOPT_IPRESOLVE	    => CURL_IPRESOLVE_V4,
+    ));
+
+    $result = curl_exec($ch);
+    curl_close($ch);
+    echo $result;
+
+    ```
+
+    ```bash {{ title: 'cURL' }}
+    curl -X POST https://barbartopup.com/api/member \
+    -d "member_code=member kode anda"
+    ```
+
+</CodeGroup>
+
+<CodeGroup title="Response">
+
+```bash {{ title: 'Success' }}
+{
+    "status": true,
+    "message": "Detail member",
+    "data": {
+        "saldo": "10000",
+        "nama": "BarbarTopup",
+        "member_code": "YNOQ-HKQO-IPKA-LPJQ-JOAU"
+    }
+}
+```
+
+```bash {{ title: 'Failed' }}
+{
+    "status": false,
+    "message": "Member tidak ditemukan",
+}
+```
+
+</CodeGroup>

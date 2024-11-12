@@ -1,0 +1,91 @@
+export const metadata = {
+  title: 'Produk',
+  description:
+    'Kami menyediakan API untuk mendapatkan informasi produk dan harga produk.',
+}
+
+export const sections = [{ title: 'Daftar Produk', id: 'daftar-produk' }]
+
+# Produk
+
+Kami menyediakan API untuk mendapatkan informasi produk dan harga produk. {{
+  className: 'lead',
+}}
+
+<Note>
+  Sebelum Anda bisa membuat request ke API kami, Anda harus mendapatkan Member
+  Code dari dashboard Anda. Anda dapat mengaksesnya di [Pengaturan &raquo;
+  Akun](https://barbartopup.com/account/settings).
+</Note>
+
+## Daftar Produk {{ tag: 'POST', label: '/produk' }}
+
+Berikut adalah endpoint API untuk mendapatkan daftar produk. {{ className: 'lead' }}
+
+## Params
+
+| Param       | Type   | Description       |
+| ----------- | ------ | ----------------- |
+| member_code | string | Member Code Anda. |
+
+<CodeGroup title="Request" tag="POST" label="/produk">
+    ```bash {{ title: 'PHP' }}
+    $curl_data = [
+        "member_code" => "Member Code anda",
+    ];
+
+    $ch = curl_init();
+        curl_setopt_array($ch, array(
+        CURLOPT_URL => "https://barbartopup.com/api/produk",
+        CURLOPT_POST => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HEADER => false,
+        CURLOPT_POSTFIELDS => $curl_data,
+        CURLOPT_IPRESOLVE	    => CURL_IPRESOLVE_V4,
+    ));
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    echo $result;
+    ```
+
+    ```bash {{ title: 'cURL' }}
+    curl -X POST https://barbartopup.com/api/produk \
+    -d "member_code=member code anda"
+    ```
+
+</CodeGroup>
+
+<CodeGroup>
+
+```bash {{ title: 'Success' }}
+{
+    "status": true,
+    "message": "Data produk ditemukan",
+    "data": [
+        {
+            "product": "10 Diamonds (9 + 1 Bonus)",
+            "games": "Mobile Legends",
+            "price": "1500",
+            "sku": "ML10",
+            "status": "On"
+        },
+        {
+            "product": "28 Diamonds (25 + 3 Bonus)",
+            "games": "Mobile Legends",
+            "price": "3000",
+            "sku": "ML28",
+            "status": "On"
+        },
+    ]
+}
+```
+
+```bash {{ title: 'Failed' }}
+{
+    "status": false,
+    "message": "Member tidak ditemukan",
+}
+```
+
+</CodeGroup>
