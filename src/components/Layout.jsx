@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import Logo from '@/images/logos/logo.svg'
+import Logo from '@/images/logos/logobar.png'
 import { Navigation } from '@/components/Navigation'
 import { SectionProvider } from '@/components/SectionProvider'
 
@@ -25,7 +25,7 @@ export function Layout({ children, allSections }) {
           <div className="contents lg:pointer-events-auto lg:block lg:w-72 lg:overflow-y-auto lg:border-r lg:border-zinc-900/10 lg:px-6 lg:pb-8 lg:pt-4 xl:w-80 lg:dark:border-white/10">
             <div className="hidden lg:flex">
               <Link href="/" aria-label="Home">
-                <Image src={Logo} alt="Logo Gotopup" width={30} height={30} />
+                <Image src={Logo} alt="Logo BarbarTopup" width={30} height={30} />
               </Link>
             </div>
             <Header />
