@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Logo from '@/images/logos/logo_read.jpeg'
+import Logo from '@/images/logos/logobar.png'
 import { forwardRef } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
@@ -71,10 +71,10 @@ export const Header = forwardRef(function Header({ className }, ref) {
         <nav className="hidden md:block">
           <ul role="list" className="flex items-center gap-8">
             <TopLevelNavItem href="/">API</TopLevelNavItem>
-            <TopLevelNavItem href="https://docs.gotopup.id" target="_blank">
+            <TopLevelNavItem href="https://docs.barbartopup.com" target="_blank">
               Documentation
             </TopLevelNavItem>
-            <TopLevelNavItem href="https://gotopup.id/kontak" target="_blank">
+            <TopLevelNavItem href="https://barbartopup.com/kontak" target="_blank">
               Support
             </TopLevelNavItem>
           </ul>
@@ -85,7 +85,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
           <ThemeToggle />
         </div>
         <div className="hidden min-[416px]:contents">
-          <Button href="https://gotopup.id/account/auth/login" target="_blank">
+          <Button href="https://barbartopup.com/account/auth/login" target="_blank">
             Sign in
           </Button>
         </div>
